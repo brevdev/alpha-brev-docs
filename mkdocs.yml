@@ -1,0 +1,65 @@
+site_name: Brev Dev Docs
+extra_css:
+  - https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css
+  - stylesheets/style.css
+  - stylesheets/highlight.css
+  - stylesheets/custom.scss
+copyright: brev.dev 2021 -- All rights reserved
+extra:
+  copyright: Brev 2021
+  social:
+    - icon: fontawesome/brands/twitter
+      link: https://twitter.com/brevdev
+    - icon: fontawesome/brands/slack
+      link: https://join.slack.com/t/brevworkspace/shared_invite/zt-i5sd2k04-QXxItvyIW3WqP7pWCushrg
+    - icon: fontawesome/brands/github
+      link: https://github.com/brevdev
+
+nav:
+  # - Home: index.md
+  - Tutorials:
+    - Home:  tutorials/index.md
+    - Tutorial 1: tutorials/1.md
+  - How-Tos:
+    - Home: howto/index.md
+    - How To Add Query Params: howto/1.md
+    - How To Add JSON Body: howto/2.md
+    - How To Process Stdout: howto/3.md
+    - How To Add Environment Variables: howto/4.md
+    - How To Create an Endpoint: howto/5.md
+    - How To Accept Different HTTP Methods: howto/6.md
+    - How To Store Data: howto/7.md
+    - How To Save a File: howto/10.md
+    - How To Pass Request Files: howto/8.md
+    - How To Return Custom Responses: howto/9.md
+  - Reference:
+    - Home: reference/index.md
+    - Brev DB (storage_context): reference/1.md
+    - Shared Code: reference/2.md
+    - Environment Variables: reference/3.md
+    - Out-of-the-Box Functionality: reference/4.md
+    - Runtime and Environment: reference/5.md
+    - Limitations: reference/6.md
+  - Discussions: 
+    - Home: discussions/index.md
+    - Brev DB Best Practices: discussions/best-practices-for-brev-database.md
+    - Our 2 Principles: discussions/our-two-principles.md
+theme:
+  name: material
+  highlightjs: true
+  hljs_languages:
+    - python
+    - bash
+  logo: 2243.png
+  favicon: 2243.png
+  custom_dir: overrides
+  # palette:
+  #   primary: deep orange
+  #   accent: cyan
+  font:
+    text: Baloo 2
+    code: Space Mono
+
+markdown_extensions:
+  - pymdownx.highlight
+  - pymdownx.superfences

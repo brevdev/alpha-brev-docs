@@ -15,14 +15,3 @@ The documentation is broken into 4 sections
 | [How-To](howto/index.md)               | `Problem oriented` guides to help you figure out something you might be working through.  |
 | [Reference](reference/index.md)        | `Information oriented` guides to shed light on the underlying systems. |
 | [Discussions](discussions/index.md)    | `Understanding oriented` guides to shed light on our how and why. |
-
-## Project layout
-
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
-
-
-
-who what when where why how

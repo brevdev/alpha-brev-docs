@@ -25,3 +25,17 @@ Discussions:
 [ ] Create the md file for your page in whichever section folder it best fits.
 [ ] Add the page to the sidebar in mkdocs.yml, otherwise no one will find it.
 [ ] In the index.md for the section's folder, add a couple lines
+
+
+# HOW TO RUN THIS LOCALLY
+
+## Run locally 
+`mkdocs serve -a localhost:3003`
+
+## Deploy
+
+Make a branch with the latest changes
+
+`mkdocs gh-deploy`
+
+Push that branch and let github pages do the rest 🎉

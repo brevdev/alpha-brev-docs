@@ -22,16 +22,16 @@ nav:
     - Tutorial 1: tutorials/1.md
   - How-Tos:
     - Home: howto/index.md
-    - How To Add Query Params: howto/1.md
-    - How To Add JSON Body: howto/2.md
-    - How To Process Stdout: howto/3.md
-    - How To Add Environment Variables: howto/4.md
-    - How To Create an Endpoint: howto/5.md
-    - How To Accept Different HTTP Methods: howto/6.md
-    - How To Store Data: howto/7.md
-    - How To Save a File: howto/10.md
-    - How To Pass Request Files: howto/8.md
-    - How To Return Custom Responses: howto/9.md
+    - How To Add Query Params: howto/how-to-add-query-params.md
+    - How To Add JSON Body: howto/how-to-add-json-body.md
+    - How To Process Stdout: howto/read-print-statements-outside-of-brev-cli-console.md
+    - How To Add Environment Variables: howto/add-environment-variables.md
+    - How To Create an Endpoint: howto/how-to-create-endpoint.md
+    - How To Accept Different HTTP Methods: howto/how-to-accept-different-http-methods.md
+    - How To Store Data: howto/how-to-store-data.md
+    - How To Save a File: howto/save-a-file.md
+    - How To Pass Request Files: howto/how-to-pass-request-files-to-endpoints.md
+    - How To Return Custom Responses: howto/return-a-custom-response.md
   - Reference:
     - Home: reference/index.md
     - Brev DB (storage_context): reference/1.md
@@ -62,4 +62,5 @@ theme:
 
 markdown_extensions:
   - pymdownx.highlight
+  - pymdownx.tabbed
   - pymdownx.superfences

@@ -19,7 +19,7 @@ nav:
   # - Home: index.md
   - Tutorials:
     - Home:  tutorials/index.md
-    - Tutorial 1: tutorials/1.md
+    - Tutorial 1: tutorials/to-do-app-backend-tutorial.md
   - How-Tos:
     - Home: howto/index.md
     - How To Add Query Params: howto/how-to-add-query-params.md

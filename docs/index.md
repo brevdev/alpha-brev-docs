@@ -16,3 +16,37 @@ The documentation is broken into 4 sections
 | [Reference](reference/index.md)        | `Information oriented` guides to shed light on the underlying systems. |
 | [Discussions](discussions/index.md)    | `Understanding oriented` guides to shed light on our how and why. |
 
+
+
+## Getting Started With Brev
+
+=== "CLI"
+
+    Install the CLI: 
+
+    ```bash
+    pip install https://github.com/brevdev/brev_cli/raw/master/dist/brev-cli-0.3.0.tar.gz
+    ```
+    *Please use python version 3.7 or later*
+
+
+    Initialize a new Brev project by creating a directory, then running `init`.
+
+    ```bash
+    mkdir super-project
+    cd super-project
+    brev init
+    ```
+
+    Try [creating an endpoint](../howto/how-to-create-endpoint) next!
+
+
+=== "Console"
+    
+    Simply go to the [console](http://app.brev.dev).
+
+    You can use the default project, or create a new project from the project dropdown.
+
+    Try [creating an endpoint](../howto/how-to-create-endpoint) next!
+
+Build something great :)

@@ -35,4 +35,4 @@ def get(db=storage_context("my_items")):
     ...
 ```
 
-You can read more about the storage_context [here](../reference/1.md).
+You can read more about the storage_context [here](../reference/built-in-database-storage-context.md).

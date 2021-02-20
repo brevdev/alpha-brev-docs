@@ -7,9 +7,9 @@ You can add environment variables to any Brev endpoint. It's a good practice to 
 
 === "CLI"
 
-    From the CLI, use the `add` command on the `variable` resource:
+    From the CLI, use the `add` command on the `env` resource:
 
-    `brev variable add MY_SECRET_KEY`
+    `brev env add MY_SECRET_KEY`
 
     This will prompt you to enter the value, and that's it! 
 
@@ -20,8 +20,8 @@ You can add environment variables to any Brev endpoint. It's a good practice to 
 
     ![Screenshot](media/variables.png)
     
-    Note: the variable value is encrypted and we don't support changing it. However, you can always delete it and add it back again with a different value. 
 
+**Note:** these variables are protected per project. The variable value is encrypted and we don't support changing it. However, you can always delete it and add it back again with a different value. 
 
 Freely use the variable in your code, insuring variables is imported:
 

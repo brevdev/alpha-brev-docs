@@ -51,6 +51,14 @@ def get(user_db = storage_context("users"), item_db = storage_context("items")):
 
 ```
 
+## View Your Database Contents
+
+You can use the database viewer in the Brev console to view or modify your database contents. Navigate to the Storage page, or use the cmd/ctrl + s keyboard shortcut.
+
+![Screenshot](media/storage_viewer.png)
+
+There's a script editor for ad hoc database scripts. You can use this for queries or modifications. 
+
 ## Brev DB API Reference
 
 ### Types

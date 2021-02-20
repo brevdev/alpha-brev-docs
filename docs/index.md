@@ -16,24 +16,3 @@ The documentation is broken into 4 sections
 | [Reference](reference/index.md)        | `Information oriented` guides to shed light on the underlying systems. |
 | [Discussions](discussions/index.md)    | `Understanding oriented` guides to shed light on our how and why. |
 
-=== "CLI"
-
-    ``` c
-    #include <stdio.h>
-
-    int main(void) {
-        printf("Hello world!\n");
-        return 0;
-    }
-    ```
-
-=== "Console"
-
-    ``` c++
-    #include <iostream>
-
-    int main(void) {
-        std::cout << "Hello world!" << std::endl;
-        return 0;
-    }
-    ```

@@ -699,16 +699,16 @@
 <h3 id="1-define-the-data-with-pydantic-basemodel-class">1: Define the data with pydantic BaseModel class</h3>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">pydantic</span> <span class="kn">import</span> <span class="n">BaseModel</span>
 
-<span class="k">class</span> <span class="nc">MyJsonBody</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">MyJsonBody</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
     <span class="n">best_tv_show_ever</span><span class="p">:</span> <span class="nb">str</span>
-    <span class="n">does_kel_love_orange_soda</span><span class="p">:</span> <span class="kc">True</span>
+    <span class="n">does_kel_love_orange_soda</span><span class="p">:</span> <span class="nb">bool</span>
 </code></pre></div>
 <h3 id="2-pass-an-instance-of-the-class-to-the-function">2: Pass an instance of the class to the function</h3>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">pydantic</span> <span class="kn">import</span> <span class="n">BaseModel</span>
 
-<span class="k">class</span> <span class="nc">MyJsonBody</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">MyJsonBody</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
     <span class="n">best_tv_show_ever</span><span class="p">:</span> <span class="nb">str</span>
-    <span class="n">does_kel_love_orange_soda</span><span class="p">:</span> <span class="kc">True</span>
+    <span class="n">does_kel_love_orange_soda</span><span class="p">:</span> <span class="nb">bool</span>
 
 <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="n">incoming</span><span class="p">:</span> <span class="n">MyJsonBody</span><span class="p">):</span>
 <span class="hll">    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="n">incoming</span><span class="o">.</span><span class="n">does_kel_love_orange_soda</span><span class="p">}</span>

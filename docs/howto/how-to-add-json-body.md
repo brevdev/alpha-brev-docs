@@ -9,9 +9,9 @@ The JSON object can hold anything, so we need to define the data before passing 
 ```python
 from pydantic import BaseModel
 
-class MyJsonBody(Model):
+class MyJsonBody(BaseModel):
     best_tv_show_ever: str
-    does_kel_love_orange_soda: True
+    does_kel_love_orange_soda: bool
 ```
 
 
@@ -19,9 +19,9 @@ class MyJsonBody(Model):
 ```python  hl_lines="8"
 from pydantic import BaseModel
 
-class MyJsonBody(Model):
+class MyJsonBody(BaseModel):
     best_tv_show_ever: str
-    does_kel_love_orange_soda: True
+    does_kel_love_orange_soda: bool
 
 def get(incoming: MyJsonBody):
     return {"result": incoming.does_kel_love_orange_soda}

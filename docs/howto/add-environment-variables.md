@@ -16,7 +16,7 @@ You can add environment variables to any Brev endpoint. It's a good practice to 
 
 === "Console"
 
-    Open the environment variables, add the variable name and value, click `add variable`! 
+    Open the environment variables (.env) from the button bar, add the variable name and value, click `add variable`! 
 
     ![Screenshot](media/variables.png)
     

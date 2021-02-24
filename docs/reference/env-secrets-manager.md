@@ -1,5 +1,5 @@
 # Variables
-
+ 
 Brev comes with a built in encrypted secrets/environment manager. 
 
 Add any environment variable or secret by:
@@ -14,7 +14,7 @@ Add any environment variable or secret by:
 
 === "Console"
 
-    Open the environment variables, add the variable name and value, click `add variable`! 
+    Open the environment variables (.env) from the button bar, add the variable name and value, click `add variable`! 
 
     ![Screenshot](media/variables.png)
     

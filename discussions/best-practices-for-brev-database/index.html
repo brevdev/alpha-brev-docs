@@ -696,7 +696,7 @@
 <span class="hll"><span class="k">def</span> <span class="nf">post</span><span class="p">(</span><span class="n">postUser</span><span class="p">:</span> <span class="n">PostUserSchema</span><span class="p">,</span> <span class="n">db</span> <span class="o">=</span> <span class="n">storage_context</span><span class="p">(</span><span class="s2">&quot;Users&quot;</span><span class="p">)):</span>
 </span><span class="hll">  <span class="k">return</span> <span class="p">{</span><span class="sa">f</span><span class="s2">&quot;Welcome </span><span class="si">{</span><span class="n">user</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">}</span>
 </span></code></pre></div>
-<p>Below is a naive implementation of using the db to add users.</p>
+<p>Below is a simple implementation of using the db to add users.</p>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">variables</span>
 <span class="kn">import</span> <span class="nn">shared</span>
 <span class="kn">from</span> <span class="nn">global_storage</span> <span class="kn">import</span> <span class="n">storage_context</span>
@@ -712,21 +712,23 @@
   <span class="k">return</span> <span class="p">{}</span>
 
 <span class="k">def</span> <span class="nf">post</span><span class="p">(</span><span class="n">postUser</span><span class="p">:</span> <span class="n">PostUserSchema</span><span class="p">,</span> <span class="n">db</span> <span class="o">=</span> <span class="n">storage_context</span><span class="p">(</span><span class="s2">&quot;Users&quot;</span><span class="p">)):</span>
-<span class="hll">  <span class="n">db</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">postUser</span><span class="o">.</span><span class="n">dict</span><span class="p">()</span>
+<span class="hll">  <span class="n">db</span><span class="p">[</span><span class="n">postUser</span><span class="o">.</span><span class="n">phone</span><span class="p">]</span> <span class="o">=</span> <span class="n">postUser</span><span class="o">.</span><span class="n">dict</span><span class="p">()</span>
 </span>  <span class="k">return</span> <span class="p">{</span><span class="sa">f</span><span class="s2">&quot;Welcome </span><span class="si">{</span><span class="n">user</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">}</span>
 </code></pre></div>
-<p>There are a couple flaws with this method:</p>
+<p>It's a simple way that absolutely works! We're conveniently using the phone number as the unique key, which is a pretty safe assumption.</p>
+<p>There are a couple drawbacks with this method:</p>
 <ol>
-<li>We might want different fields for different transactions. For example, create_date should be generated on the server, not on the incoming json. </li>
-<li>The creation logic should be separated, otherwise you might find yourself replicating the logic in multiple places.</li>
+<li>We might want different fields for different transactions. For example, create_date should be generated on the server, not on the incoming json.</li>
+<li>The creation logic should be separated from the storing logic, so that if creating requires custom logic, you won't have to replicate it elsewhere.</li>
 <li>We should isolate database operations from the in-memory object. This will allow your code to require less refactoring if you change the underlying database.</li>
 </ol>
-<p>To start, let's add a function to create the user. In our case this is trivial, but it could include some more complicated logic later, like triggering some downstream effect. This function should be part of the pydantic class. Since we want this function to create an instance of the class, not operate on an instance, we will use a class method. </p>
+<p>To start, let's add a function to create the user. In our case this is trivial, but it could include some more complicated logic later, like triggering some downstream effect. This function should be part of the pydantic class. Since we want this function to create an instance of the class, not operate on an instance, we will use a class method.</p>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">variables</span>
 <span class="kn">import</span> <span class="nn">shared</span>
 <span class="kn">from</span> <span class="nn">global_storage</span> <span class="kn">import</span> <span class="n">storage_context</span>
 <span class="kn">from</span> <span class="nn">pydantic</span> <span class="kn">import</span> <span class="n">BaseModel</span>
-
+<span class="hll"><span class="kn">import</span> <span class="nn">datetime</span>
+</span>
 <span class="k">class</span> <span class="nc">User</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
   <span class="n">phone</span><span class="p">:</span> <span class="nb">str</span>
   <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
@@ -743,14 +745,17 @@
   <span class="n">db</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">postUser</span><span class="o">.</span><span class="n">dict</span><span class="p">()</span>
   <span class="k">return</span> <span class="p">{</span><span class="sa">f</span><span class="s2">&quot;Welcome </span><span class="si">{</span><span class="n">user</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">}</span>
 </code></pre></div>
-<p>Two things to notice:
-1. The create_date is now generated by the create function, not from incoming json.
-2. The instance is created, but nothing is persisted in the database.</p>
+<p>Two things to notice:</p>
+<ol>
+<li>The create_date is now generated by the create function, not from incoming json.</li>
+<li>The instance is created, but nothing is persisted in the database.</li>
+</ol>
 <p>There are use cases where not persisting in the database is desirable. Say you have a logic flow of first creating the user, then verifying if they have a specific attribute, which without one, you want to abort. Rather than always persisting the user then having to clean up if it was a mistake, now you have to be intentional about persisting the user. Let's go ahead and add the persisting function.</p>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">variables</span>
 <span class="kn">import</span> <span class="nn">shared</span>
 <span class="kn">from</span> <span class="nn">global_storage</span> <span class="kn">import</span> <span class="n">storage_context</span>
 <span class="kn">from</span> <span class="nn">pydantic</span> <span class="kn">import</span> <span class="n">BaseModel</span>
+<span class="kn">import</span> <span class="nn">datetime</span>
 
 <span class="k">class</span> <span class="nc">User</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
   <span class="n">phone</span><span class="p">:</span> <span class="nb">str</span>
@@ -772,18 +777,19 @@
   <span class="n">db</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">postUser</span><span class="o">.</span><span class="n">dict</span><span class="p">()</span>
   <span class="k">return</span> <span class="p">{</span><span class="sa">f</span><span class="s2">&quot;Welcome </span><span class="si">{</span><span class="n">user</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">}</span>
 </code></pre></div>
-<p>Few things to notice. </p>
+<p>Few things to notice.</p>
 <ol>
 <li>Unlike the <code>create</code> function, we need an instance of the user to persist in the database, so the <code>add</code> function is not a classmethod. It will only operate on a user.</li>
 <li>It requires you to pass in the instance of the database you want to add.</li>
 <li><code>.dict()</code> is a built in pydantic function that converts the user object to a dictionary before persisting.</li>
 </ol>
-<p>Notice how we are no longer using the <code>create_date</code> being passed in, and generating it on creation instead. We should modify our post call so it doesn't require the extraneous field. 
+<p>Notice how we are no longer using the <code>create_date</code> being passed in, and generating it on creation instead. We should modify our post call so it doesn't require the extraneous field.
 We changed the name of the original BaseModel class, so we actually don't have to modify the class we pass in to the POST call.</p>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">variables</span>
 <span class="kn">import</span> <span class="nn">shared</span>
 <span class="kn">from</span> <span class="nn">global_storage</span> <span class="kn">import</span> <span class="n">storage_context</span>
 <span class="kn">from</span> <span class="nn">pydantic</span> <span class="kn">import</span> <span class="n">BaseModel</span>
+<span class="kn">import</span> <span class="nn">datetime</span>
 
 <span class="k">class</span> <span class="nc">User</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
   <span class="n">phone</span><span class="p">:</span> <span class="nb">str</span>
@@ -815,6 +821,7 @@ We changed the name of the original BaseModel class, so we actually don't have t
 <span class="kn">import</span> <span class="nn">shared</span>
 <span class="kn">from</span> <span class="nn">global_storage</span> <span class="kn">import</span> <span class="n">storage_context</span>
 <span class="kn">from</span> <span class="nn">pydantic</span> <span class="kn">import</span> <span class="n">BaseModel</span>
+<span class="kn">import</span> <span class="nn">datetime</span>
 
 <span class="k">class</span> <span class="nc">User</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
   <span class="n">phone</span><span class="p">:</span> <span class="nb">str</span>
@@ -847,6 +854,7 @@ We changed the name of the original BaseModel class, so we actually don't have t
 <span class="kn">import</span> <span class="nn">shared</span>
 <span class="kn">from</span> <span class="nn">global_storage</span> <span class="kn">import</span> <span class="n">storage_context</span>
 <span class="kn">from</span> <span class="nn">pydantic</span> <span class="kn">import</span> <span class="n">BaseModel</span>
+<span class="kn">import</span> <span class="nn">datetime</span>
 
 <span class="k">class</span> <span class="nc">User</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
   <span class="n">phone</span><span class="p">:</span> <span class="nb">str</span>
@@ -878,7 +886,7 @@ We changed the name of the original BaseModel class, so we actually don't have t
   <span class="n">user</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">db</span><span class="p">)</span>
   <span class="k">return</span> <span class="p">{</span><span class="sa">f</span><span class="s2">&quot;Welcome </span><span class="si">{</span><span class="n">user</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">}</span>
 </code></pre></div>
-<p>And that's it! We'd love to continue this discussion. Reach us <a href="https://join.slack.com/t/brevworkspace/shared_invite/zt-i5sd2k04-QXxItvyIW3WqP7pWCushrg">on slack</a> or text Nader at 415-818-0207</p>
+<p>And that's it! You might not want to implement everything here. For example, you might just want to have separate models for posting up data and for storing-- that way you can have server generated fields such as <code>create_date</code>. We'd love to continue this discussion. Reach us <a href="https://join.slack.com/t/brevworkspace/shared_invite/zt-i5sd2k04-QXxItvyIW3WqP7pWCushrg">on slack</a> or text Nader at 415-818-0207</p>
                 
               
               

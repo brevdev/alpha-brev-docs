@@ -9,7 +9,7 @@ You can add environment variables to any Brev endpoint. It's a good practice to 
 
     From the CLI, use the `add` command on the `env` resource:
 
-    `brev env add MY_SECRET_KEY`
+    `brev env add --name MY_SECRET_KEY`
 
     This will prompt you to enter the value, and that's it! 
 
@@ -29,7 +29,7 @@ Freely use the variable in your code, insuring variables is imported:
 import variables
 
 def get():
-    print(f"Secret Key: {MY_SECRET_KEY}")
+    print(f"Secret Key: {variables.MY_SECRET_KEY}")
     return{}
 ```
 

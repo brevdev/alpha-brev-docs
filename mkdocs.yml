@@ -24,7 +24,7 @@ nav:
     - Home: howto/index.md
     - How To Add Query Params: howto/how-to-add-query-params.md
     - How To Add JSON Body: howto/how-to-add-json-body.md
-    - How To Process Stdout: howto/read-print-statements-outside-of-brev-cli-console.md
+    - How To Access Stdout: howto/read-print-statements-outside-of-brev-cli-console.md
     - How To Add Environment Variables: howto/add-environment-variables.md
     - How To Create an Endpoint: howto/how-to-create-endpoint.md
     - How To Accept Different HTTP Methods: howto/how-to-accept-different-http-methods.md

@@ -23,11 +23,11 @@ brev init
 ### 2: Create the endpoint
 In the directory of your brev project, create a new endpoint. We named it `todos` but you can name it however you like.
 ```bash
-brev endpoint add todos
+brev endpoint add --name todos
 ```
 By default, everything with Brev is hosted and deployed for you! Run the below command to see the endpoint URLs.
 ```
-brev list
+brev endpoint list
 ```
 
 Copy the URL and open it in a new tab with your web browser! You should see an empty response `{}`
@@ -82,7 +82,7 @@ Data validation happens automatically! So if your endpoint is called with JSON t
 
 Test it out! Run your endpoint using an app like Postman, the Brev console, or your terminal! Via the Brev CLI: 
 ```bash
-brev endpoint run todo POST --body '{"task":"Brev Tutorial 1", "status": "incomplete"}'
+brev endpoint run --name todo --method POST --body '{"task":"Brev Tutorial 1", "status": "incomplete"}'
 ```
 
 
@@ -196,8 +196,8 @@ def put(id, db=storage_context("todos")):
 
 And there you have it! You now have everything you need to build out a ToDo app! Brev is meant to be configured to your specific use case. 
 
-### Some good next steps for this tutorial:
+### Further Reading
 
-- [How To: Best Practices for Brev DB](index.md)
+- [How To: Best Practices for Brev DB](../../discussions/best-practices-for-brev-database)
 
-- [Tutorial #2: Make SMS bot w/ Twilio](index.md)
+<!-- - [Tutorial #2: Make SMS bot w/ Twilio](index.md) -->

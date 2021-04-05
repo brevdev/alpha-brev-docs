@@ -13,7 +13,7 @@ def post(file_contents: bytes = File(...)):
   return {}
 ```
 
-We can use Brev's built in [file uploader](../../reference/4/#file-upload) to save the file and return a link to it!
+We can use Brev's built in [file upload function](../../reference/out-of-the-box-sms-file-upload-roboflow/#file-upload) to save the file and return a link to it!
 
 ```python hl_lines="2 6 8"
 from fastapi import File

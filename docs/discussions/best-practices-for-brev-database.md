@@ -2,7 +2,7 @@
 
 ## Best Practices for Brev Storage
 
-The Brev DB is a simple key value store. It's a nosql database, but even if you're using sql, much of this discussions is still very relevant.
+The Brev DB is a simple key value store. It's a nosql database, but even if you're using sql, these best practices are relevant.
 
 Let's build a simple API to get and create users. Create an endpoint and make sure you have a GET call for fetching the users, and a POST call for creating the users.
 

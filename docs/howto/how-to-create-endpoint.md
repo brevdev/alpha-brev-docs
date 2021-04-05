@@ -6,7 +6,7 @@
     To create an endpoint, simply use the `add` command on the `endpoint` resource.
 
     ```bash
-    brev endpoint add MyNewEndpoint
+    brev endpoint add --name MyNewEndpoint
     ```
 
     You'll now have a file `MyNewEndpoint.py` which has a get function.

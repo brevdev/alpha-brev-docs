@@ -8,7 +8,7 @@ Add any environment variable or secret by:
 
     From the CLI, use the `add` command on the `env` resource:
 
-    `brev env add MY_SECRET_KEY`
+    `brev env add --name MY_SECRET_KEY`
 
     This will prompt you to enter the value, and that's it! 
 

@@ -2,7 +2,7 @@
 ## How to Store Data
 
 
-You probably want to persist data in a database. Brev's built in database is great for simple applications, or you can fully configure your own database if your use case demands it. Brev's db is a key-value, nosql database. We highly recommend you check out [this discussion about how to best utilize it in your application.](../discussions/best-practices-for-brev-database.md)
+You probably want to persist data in a database. Brev's built in database is great for simple applications, or you can fully configure your own database if your use case demands it. Brev's db is a key-value, nosql database. Check out our [discussion about how to best utilize Brev DB in your application.](../discussions/best-practices-for-brev-database.md)
 
 
 

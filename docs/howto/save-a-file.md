@@ -2,7 +2,7 @@
 
 ## How to Save a File
 
-You can save a file using Brev's built in [file uploader](../../reference/out-of-the-box-sms-file-upload-roboflow/#file-upload).
+You can save a file using Brev's built in [file upload function](../../reference/out-of-the-box-sms-file-upload-roboflow/#file-upload).
 
 ```python hl_lines="7"
 from fastapi import File
@@ -16,6 +16,6 @@ def post()
   return {"file_url": link}
 ```
 
-The file uploader `.upload()` function returns a URL to your file. You can store that URL in your Brev DB or simply return it from your endpoint! The URL does not expire.
+The file upload function `.upload()` returns a URL to your file. You can store that URL in your Brev DB or simply return it from your endpoint! The URL does not expire.
 
 See how to upload files to your endpoints [here](../how-to-pass-request-files-to-endpoints).

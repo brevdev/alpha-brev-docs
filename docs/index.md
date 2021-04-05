@@ -24,11 +24,13 @@ The documentation is broken into 4 sections
 
     Install the CLI: 
 
-    ```bash
-    pip install https://github.com/brevdev/brev_cli/raw/master/dist/brev-cli-0.3.0.tar.gz
-    ```
-    *Please use python version 3.7 or later*
+    Using homebrew, run
 
+    ```bash
+    brew install brevdev/tap/brev
+    ```
+
+    Or you can download the binary [here](https://github.com/brevdev/brev-go-cli/releases)
 
     Initialize a new Brev project by creating a directory, then running `init`.
 
